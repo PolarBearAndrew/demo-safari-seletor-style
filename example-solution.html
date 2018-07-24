@@ -13,30 +13,36 @@
       width: 160px;
     }
     .mask {
-      box-sizing: border-box;
-      padding-left: 8px;
-      height: 100%;
-      width:  100%;
       background-color: #c1c1c1;
       border: solid 1px #808080;
+      box-sizing: border-box;
+      padding-left: 8px;
       font-size: 16px;
+      height: 100%;
+      width:  100%;
       color: white;
-      /* add more css let <div> more like <selector> */
+      /* add more css let <div> more like <selector>. */
       line-height: 40px;
       border-radius: 6px;
-      transform: translateZ(30px);
+      /* Transform is working in all browser, don't use  z-index. */
     }
     .hidden-selector {
-      -webkit-appearance: menulist-button;
       position: absolute;
       top: 0px;
       left: 0px;
-      width: 100%;
-      height: 100%;
+      /* Let selector smaller than mask. */
       margin: 1px 0 0 1px;
+      width: 98%;
+      height: 98%;
+      /* Hide selector value text in Chrome */
       color: rgba(255, 255, 255, 0);
+      /* hide it */
+      opacity: 0;
+      /* Allow edit selector height in Safari */
+      -webkit-appearance: menulist-button;
     }
     .hidden-selector:focus {
+      /* Remove outlint in Chrome  */
       outline: none;
     }
   </style>
@@ -49,17 +55,15 @@
     <div class="wrapper">
       <div class="mask"> {{ dessert }} </div>
       <select name="dessert" class="hidden-selector" v-model="dessert">
-          <option value="cookie">Cookie</option>
-          <option value="cake">Cake</option>
-          <option value="milk">Milk</option>
-          <option value="chocolate">Chocolate</option>
+        <option value="cookie">Cookie</option>
+        <option value="cake">Cake</option>
+        <option value="milk">Milk</option>
+        <option value="chocolate">Chocolate</option>
       </select>
     </div>
-
-    
-
   </div>
 
+  <!-- use vue to sync value. -->
   <script>
     new Vue({
       el: '#app',
